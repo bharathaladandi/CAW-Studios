@@ -1,0 +1,23 @@
+.Container{
+    border: 1px solid green;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #1e633f;
+    height: 50px;
+}
+
+.Navinner{
+    display: flex;
+    gap: 40px;
+    width: 50%; 
+    color: white;
+    margin: auto;
+}
+
+.Navinnersec{
+    display: flex;
+    justify-content: space-around;
+    width: 20%; 
+    color: white;
+    margin: auto;
+}
