@@ -5,15 +5,18 @@ import {
   } from "./Product.types";
   
 
-export const Approve = () => ({
+export const Approve = (id) => ({
     type: APPROVED,
+    payload: { id },
   });
   
-  export const Missing = () => ({
+  export const Missing = (id) => ({
     type: MISSING,
+    payload: { id },
   });
   
-  export const MissingUrgent = () => ({
+  export const MissingUrgent = (id) => ({
     type: MISSING_URGENT,
+    payload: { id },
   });
   

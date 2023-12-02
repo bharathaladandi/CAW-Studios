@@ -20,17 +20,26 @@ export const ProductReducer = (state = initialState, action) => {
     switch (action.type) {
         case APPROVED:
             return {
-                ...state
+                ...state,
+                products: state.products.map((item) =>
+                item.id === action.payload.id ? { ...item, status: 'Approved' } : item
+                ),
             };
 
         case MISSING:
             return {
-                ...state
+                ...state,
+                products: state.products.map((item) =>
+                item.id === action.payload.id ? { ...item, status: 'Missing' } : item
+                ),
             };
 
         case MISSING_URGENT:
             return {
-                ...state
+                ...state,
+                products: state.products.map((item) =>
+                item.id === action.payload.id ? { ...item, status: 'Missing Urgent' } : item
+                ),
             };
         
         default:
