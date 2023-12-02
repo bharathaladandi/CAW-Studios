@@ -1,6 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Approve, Missing, MissingUrgent } from '../Redux/Product.actions';
+import { Approve, Missing, MissingUrgent, Quantity } from '../Redux/Product.actions';
+import "../Styles/OrderPage.style.css";
+
 
 export const OrderPage = () => {
 
@@ -13,41 +15,76 @@ export const OrderPage = () => {
     dispatch(Approve(id));
   };
 
-  const handleMarkMissing = (id) => {
+  const handleMissing = (id) => {
     dispatch(Missing(id));
   };
 
-  const handleMarkMissingUrgent = (id) => {
+  const handleMissingUrgent = (id) => {
     dispatch(MissingUrgent(id));
   };
 
+  const handleQuantity = (id, newQuantity) => {
+    dispatch(Quantity(id, newQuantity));
+  };
+
+  const total = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
+
   return (
     <div>
-      <h1>OrderPage</h1>
-      <div>
-        <div>
+      <h2>Order Details</h2>
+      <table className='maintable'>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
           {products.map((product) => (
-            <div key={product.id}>
-              <img src={product.image} alt={product.name} />
-              <div>{product.name}</div>
-              <div>{product.brand}</div>
-              <div>{product.price}</div>
-              <div>{product.status}</div>
-              <div>
-                <span onClick={() => handleApprove(product.id)} style={{ cursor: 'pointer' }}>
-                  ✔
-                </span>{' '}
-                <span onClick={() => handleMarkMissing(product.id)} style={{ cursor: 'pointer' }}>
-                  ✖
-                </span>{' '}
-                <span onClick={() => handleMarkMissingUrgent(product.id)} style={{ cursor: 'pointer' }}>
-                  missingUrgent
-                </span>{' '}
-              </div>
-            </div>
+            <tr key={product.id}>
+              <td className='tableimage'>
+                <img src={product.image} alt={product.name} />
+              </td>
+              <td>{product.name}</td>
+              <td>{product.brand}</td>
+              <td>${product.price}</td>
+              <td>
+                <select
+                  value={product.quantity}
+                  onChange={(e) => handleQuantity(product.id, parseInt(e.target.value, 10))}
+                >
+                  {[1, 2, 3, 4, 5].map((quantity) => (
+                    <option key={quantity} value={quantity}>
+                      {quantity}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td>${product.price * product.quantity}</td>
+              <td>{product.status}</td>
+              <td>
+                <div>
+                  <span className='tablespan' onClick={() => handleApprove(product.id)}>
+                    ✔
+                  </span>{' '}
+                  <span className='tablespan' onClick={() => handleMissing(product.id)}>
+                    ✖
+                  </span>{' '}
+                  <span className='tablespan' onClick={() => handleMissingUrgent(product.id)}>
+                    missingUrgent
+                  </span>{' '}
+                </div>
+              </td>
+            </tr>
           ))}
-        </div>
-      </div>
+        </tbody>
+      </table>
+      <div><h3>Total Amount: {total}</h3></div>
     </div>
   )
 }

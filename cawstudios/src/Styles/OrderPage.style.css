@@ -1,0 +1,16 @@
+.maintable{
+    width: 100%;
+    border-collapse: 'collapse';
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 90%;
+    margin: auto;
+}
+
+.tableimage > img{
+    width: 100px;
+    height: 80px;
+}
+
+.tablespan{
+    cursor: pointer;
+}

@@ -1,7 +1,8 @@
 import {
     APPROVED,
     MISSING,
-    MISSING_URGENT
+    MISSING_URGENT,
+    QUANTITY
   } from "./Product.types";
   
 
@@ -20,3 +21,11 @@ export const Approve = (id) => ({
     payload: { id },
   });
   
+
+  export const Quantity = (id, newQuantity) => ({
+    type: QUANTITY,
+    payload: {
+      id,
+      newQuantity,
+    },
+  });
