@@ -31,20 +31,21 @@ export const OrderPage = () => {
 
   return (
     <div>
-      <h2>Order Details</h2>
+      {/* <h2>Order Page</h2> */}
       <table className='maintable'>
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
+        <thead className='tablehead'>
+          <tr className='tabletr'>
+            <th >Image</th>
+            <th>Product Name</th>
             <th>Brand</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='tablebody'>
           {products.map((product) => (
             <tr key={product.id}>
               <td className='tableimage'>
@@ -54,7 +55,7 @@ export const OrderPage = () => {
               <td>{product.brand}</td>
               <td>${product.price}</td>
               <td>
-                <select
+                <select className='tablespan'
                   value={product.quantity}
                   onChange={(e) => handleQuantity(product.id, parseInt(e.target.value, 10))}
                 >
@@ -68,7 +69,7 @@ export const OrderPage = () => {
               <td>${product.price * product.quantity}</td>
               <td>{product.status}</td>
               <td>
-                <div>
+                <div className='tablespanaction'>
                   <span className='tablespan' onClick={() => handleApprove(product.id)}>
                     ✔
                   </span>{' '}
@@ -84,7 +85,7 @@ export const OrderPage = () => {
           ))}
         </tbody>
       </table>
-      <div><h3>Total Amount: {total}</h3></div>
+      <div className='maintotal'><h3>Total Amount: {total}</h3></div>
     </div>
   )
 }

@@ -10,7 +10,7 @@ export const Navbar = () => {
                 <div>Analytics</div>
             </div>
             <div className='Navinnersec'>
-                <i>abcd</i>
+                <i class="fa fa-shopping-cart" ></i>
                 <div>Hello, James</div>
             </div>
         </div>
