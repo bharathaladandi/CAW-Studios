@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Approve, Missing, MissingUrgent, Quantity } from '../Redux/Product.actions';
 import "../Styles/OrderPage.style.css";
@@ -9,7 +9,6 @@ export const OrderPage = () => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
-
 
   const handleApprove = (id) => {
     dispatch(Approve(id));
@@ -29,6 +28,19 @@ export const OrderPage = () => {
 
   const total = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
 
+
+  const BackgroundColor = (status) => {
+    switch (status) {
+      case 'Approved':
+        return '#9ae6b4';
+      case 'Missing':
+        return '#feb2b2';
+      case 'Missing Urgent':
+        return 'rgb(255, 20, 20)';
+      default:
+        return 'transparent';
+    }
+  };
   return (
     <div>
       {/* <h2>Order Page</h2> */}
@@ -67,7 +79,8 @@ export const OrderPage = () => {
                 </select>
               </td>
               <td>${product.price * product.quantity}</td>
-              <td>{product.status}</td>
+              <td className='tablestatus'>
+                <p style={{ backgroundColor: BackgroundColor(product.status), }}>{product.status}</p></td>
               <td>
                 <div className='tablespanaction'>
                   <span className='tablespan' onClick={() => handleApprove(product.id)}>

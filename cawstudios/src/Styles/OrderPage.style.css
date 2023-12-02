@@ -45,3 +45,7 @@
     width: 90%;
     font-size: 25px;
 }
+
+.tablestatus > p{
+    background-color: rgb(6, 197, 124);
+}
